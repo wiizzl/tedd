@@ -1,0 +1,7 @@
+{
+    "token": "discord_bot_token",
+    "id": "discord_app_id",
+    "guild": "guild_id",
+
+    "mongoUrl": "database_url"
+}

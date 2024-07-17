@@ -1,0 +1,355 @@
+{
+    "box": [
+        "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm1xa3Awd3ZoYmx1OW1ocGN3NmsyNGR1d2N4dTdqYzdodW94b3pvZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Cb9HMLbBRLBYI0BcCP/giphy.gif",
+        "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXpqMXhmNHllZm5rMnBqZWlmNTA3MXozMnNxemFvbDN1aGxoaHNmMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/avBUws53syzZpKMgoU/giphy.gif",
+        "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHNuNWZ3MTUyaXVjNGk3YzlsZm50YTJ2dmJwcGt5Njgwdm1nbmFiYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/n182LGBY6XCAD8d2Rk/giphy.gif",
+        "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGF1eXJkYjlpOGJyZ3p1dDRtOTB5Z2gybzhwaDRnOWUxM3VlMWZqMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0J7xcbgLMlyEO9jzE8/giphy.gif"
+    ],
+
+    "weapons": [
+        {
+            "game": "Call of Duty Black Ops 3",
+            "items": [
+                {
+                    "name": "Commun",
+                    "xp": 5,
+                    "color": "fafafa",
+                    "weight": 50,
+                    "object": [
+                        {
+                            "name": "MR 6",
+                            "url": "https://i.imgur.com/R9z9Ei3.jpeg"
+                        },
+                        {
+                            "name": "RK 5",
+                            "url": "https://i.imgur.com/b9P6o4J.jpeg"
+                        },
+                        {
+                            "name": "ICAR 9",
+                            "url": "https://i.imgur.com/KBJl2vz.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Peu commun",
+                    "xp": 15,
+                    "color": "61ff30",
+                    "weight": 30,
+                    "object": [
+                        {
+                            "name": "Drakon",
+                            "url": "https://i.imgur.com/mfkx0rp.jpeg"
+                        },
+                        {
+                            "name": "Locus",
+                            "url": "https://i.imgur.com/MUevpbb.jpeg"
+                        },
+                        {
+                            "name": "P06",
+                            "url": "https://i.imgur.com/pG3QVhc.jpeg"
+                        },
+                        {
+                            "name": "SVG 100",
+                            "url": "https://i.imgur.com/JQuz1kn.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Rare",
+                    "xp": 30,
+                    "color": "0042ff",
+                    "weight": 15,
+                    "object": [
+                        {
+                            "name": "KRM 262",
+                            "url": "https://i.imgur.com/ZunorM4.jpeg"
+                        },
+                        {
+                            "name": "205 Brecci",
+                            "url": "https://i.imgur.com/sVh54Qc.jpeg"
+                        },
+                        {
+                            "name": "Haymaker 12",
+                            "url": "https://i.imgur.com/aCGTfx4.jpeg"
+                        },
+                        {
+                            "name": "Argus",
+                            "url": "https://i.imgur.com/6I3pDuQ.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Épique",
+                    "xp": 45,
+                    "color": "8400ff",
+                    "weight": 5,
+                    "object": [
+                        {
+                            "name": "Razorback",
+                            "url": "https://i.imgur.com/lsOVUDP.jpeg"
+                        },
+                        {
+                            "name": "Pharo",
+                            "url": "https://i.imgur.com/8aultd7.jpeg"
+                        },
+                        {
+                            "name": "Vesper",
+                            "url": "https://i.imgur.com/mDuGr86.jpeg"
+                        },
+                        {
+                            "name": "Weevil",
+                            "url": "https://i.imgur.com/V6VNe6n.jpeg"
+                        },
+                        {
+                            "name": "VPM",
+                            "url": "https://i.imgur.com/VjBwCZ6.jpeg"
+                        },
+                        {
+                            "name": "Kuda",
+                            "url": "https://i.imgur.com/vwM08O5.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Légendaire",
+                    "xp": 60,
+                    "color": "ff9c00",
+                    "weight": 2,
+                    "object": [
+                        {
+                            "name": "M8A7",
+                            "url": "https://i.imgur.com/MCiNjfF.jpeg"
+                        },
+                        {
+                            "name": "Man-O-War",
+                            "url": "https://i.imgur.com/dCDmEj8.jpeg"
+                        },
+                        {
+                            "name": "ICR7",
+                            "url": "https://i.imgur.com/QX9FWxT.jpeg"
+                        },
+                        {
+                            "name": "HVK 30",
+                            "url": "https://i.imgur.com/KVGnofk.jpeg"
+                        },
+                        {
+                            "name": "XR 2",
+                            "url": "https://i.imgur.com/aBy7lZL.jpeg"
+                        },
+                        {
+                            "name": "KN44",
+                            "url": "https://i.imgur.com/gKdXcos.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Fabuleux",
+                    "xp": 80,
+                    "color": "00ffd8",
+                    "weight": 1,
+                    "object": [
+                        {
+                            "name": "Dingo",
+                            "url": "https://i.imgur.com/CKwqyiF.jpeg"
+                        },
+                        {
+                            "name": "48 Dredge",
+                            "url": "https://i.imgur.com/32ugD9J.jpeg"
+                        },
+                        {
+                            "name": "Gorgon",
+                            "url": "https://i.imgur.com/DqNKb6u.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mythique",
+                    "xp": 100,
+                    "color": "ff0000",
+                    "weight": 0.5,
+                    "object": []
+                },
+                {
+                    "name": "Maudit",
+                    "xp": 0,
+                    "color": "000000",
+                    "weight": 1,
+                    "object": [
+                        {
+                            "name": "Teddy Bear",
+                            "url": "https://i.imgur.com/M6Mil7b.png"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "game": "Call of Duty Black Ops 4",
+            "items": [
+                {
+                    "name": "Commun",
+                    "xp": 5,
+                    "color": "fafafa",
+                    "weight": 50,
+                    "object": [
+                        {
+                            "name": "Mozu",
+                            "url": "https://i.imgur.com/i0xWFuL.jpeg"
+                        },
+                        {
+                            "name": "Rk7 Garrison",
+                            "url": "https://i.imgur.com/mn2kZUv.jpeg"
+                        },
+                        {
+                            "name": "Strife",
+                            "url": "https://i.imgur.com/ViwK3fq.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Peu commun",
+                    "xp": 15,
+                    "color": "61ff30",
+                    "weight": 30,
+                    "object": [
+                        {
+                            "name": "Koshka",
+                            "url": "https://i.imgur.com/QM4t8YK.jpeg"
+                        },
+                        {
+                            "name": "Outlow",
+                            "url": "https://i.imgur.com/sQXGLJ4.jpeg"
+                        },
+                        {
+                            "name": "Paladin HB50",
+                            "url": "https://i.imgur.com/qRJUhAz.jpeg"
+                        },
+                        {
+                            "name": "SDM",
+                            "url": "https://i.imgur.com/NuWSW40.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Rare",
+                    "xp": 30,
+                    "color": "0042ff",
+                    "weight": 15,
+                    "object": [
+                        {
+                            "name": "Mog 12",
+                            "url": "https://i.imgur.com/I142Lhx.jpeg"
+                        },
+                        {
+                            "name": "SG 12",
+                            "url": "https://i.imgur.com/aq9r6DG.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Épique",
+                    "xp": 45,
+                    "color": "8400ff",
+                    "weight": 5,
+                    "object": [
+                        {
+                            "name": "Cordite",
+                            "url": "https://i.imgur.com/T4T0lfy.jpeg"
+                        },
+                        {
+                            "name": "Daemon 3XB",
+                            "url": "https://i.imgur.com/EYTRBvw.jpeg"
+                        },
+                        {
+                            "name": "GKS",
+                            "url": "https://i.imgur.com/C5pWjbe.jpeg"
+                        },
+                        {
+                            "name": "Saug 9mn",
+                            "url": "https://i.imgur.com/U1Trsok.jpeg"
+                        },
+                        {
+                            "name": "MX9",
+                            "url": "https://i.imgur.com/h34F0IC.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Légendaire",
+                    "xp": 60,
+                    "color": "ff9c00",
+                    "weight": 2,
+                    "object": [
+                        {
+                            "name": "Grav",
+                            "url": "https://i.imgur.com/jrplxyq.jpeg"
+                        },
+                        {
+                            "name": "KN 57",
+                            "url": "https://i.imgur.com/l2xOB2E.jpeg"
+                        },
+                        {
+                            "name": "Maddox RFB",
+                            "url": "https://i.imgur.com/x9dK8vz.jpeg"
+                        },
+                        {
+                            "name": "Rampart",
+                            "url": "https://i.imgur.com/FnzJeZO.jpeg"
+                        },
+                        {
+                            "name": "Swat RFT",
+                            "url": "https://i.imgur.com/8rcFs3s.jpeg"
+                        },
+                        {
+                            "name": "Vepr XKG",
+                            "url": "https://i.imgur.com/66lfF4A.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Fabuleux",
+                    "xp": 80,
+                    "color": "00ffd8",
+                    "weight": 1,
+                    "object": [
+                        {
+                            "name": "Tiger Shark",
+                            "url": "https://i.imgur.com/USa6JWo.jpeg"
+                        },
+                        {
+                            "name": "Hades",
+                            "url": "https://i.imgur.com/FsYSb4S.jpeg"
+                        },
+                        {
+                            "name": "VKM-750",
+                            "url": "https://i.imgur.com/C7S1VGs.jpeg"
+                        },
+                        {
+                            "name": "Titan",
+                            "url": "https://i.imgur.com/KjAYUHY.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mythique",
+                    "xp": 100,
+                    "color": "ff0000",
+                    "weight": 0.5,
+                    "object": []
+                },
+                {
+                    "name": "Maudit",
+                    "xp": 0,
+                    "color": "000000",
+                    "weight": 1,
+                    "object": [
+                        {
+                            "name": "Teddy Bear",
+                            "url": "https://i.imgur.com/M6Mil7b.png"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
