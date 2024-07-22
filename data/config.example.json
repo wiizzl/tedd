@@ -3,5 +3,7 @@
     "id": "discord_app_id",
     "guild": "guild_id",
 
+    "color": "#20B525",
+
     "mongoUrl": "database_url"
 }

@@ -18,6 +18,7 @@ export default class Ticket extends Interaction {
         super(client, {
             name: "ticket",
             permissions: PermissionFlagsBits.UseApplicationCommands,
+            cooldown: 3,
             type: ComponentType.StringSelect,
         });
     }

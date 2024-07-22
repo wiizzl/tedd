@@ -1,21 +1,21 @@
 import { EmbedBuilder, Events, Message, TextChannel } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import Event from "../../base/classes/Event";
+import CustomClient from "../../../base/classes/CustomClient";
+import Event from "../../../base/classes/Event";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class MessageUpdate extends Event {
     constructor(client: CustomClient) {
         super(client, {
             name: Events.MessageUpdate,
-            description: "Message update event",
+            description: "Send message to log channel when user update a message.",
             once: false,
         });
     }
 
     async Execute(oldMessage: Message, newMessage: Message) {
-        if (oldMessage.author.bot) return;
+        if ((oldMessage.author.bot && newMessage.author.bot) || (!oldMessage.inGuild() && !newMessage.inGuild())) return;
 
         try {
             const guild = await GuildConfig.findOne({ guildId: oldMessage.guildId });

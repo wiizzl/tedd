@@ -14,12 +14,9 @@ importers:
       '@discordjs/voice':
         specifier: ^0.17.0
         version: 0.17.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.2.0)
-      discord-arts:
-        specifier: ^0.6.1
-        version: 0.6.1
-      discord-gamecord:
-        specifier: ^4.4.2
-        version: 4.4.2
+      '@napi-rs/canvas':
+        specifier: ^0.1.53
+        version: 0.1.53
       discord-html-transcripts:
         specifier: ^3.2.0
         version: 3.2.0(discord.js@14.15.3)
@@ -332,12 +329,6 @@ packages:
   discord-api-types@0.37.83:
     resolution: {integrity: sha512-urGGYeWtWNYMKnYlZnOnDHm8fVRffQs3U0SpE8RHeiuLKb/u92APS8HoQnPTFbnXmY1vVnXjXO4dOxcAn3J+DA==}
 
-  discord-arts@0.6.1:
-    resolution: {integrity: sha512-XRny91vhr94UUsDS1dk8uGsLq0K1wwRXJ6qk3M9jN8TmINI+mQt6SqhEcBon6/ulRBS//PhPRrRfg5KkvGqtig==}
-
-  discord-gamecord@4.4.2:
-    resolution: {integrity: sha512-SRrfAG9MLjK0Xw/2+hN9HfmIqkl+0TVPTwQXXOvwXpzMBJbpsY+KliTl6lQOur8Qb61rhOAmwMPWv/idQDYYMA==}
-
   discord-html-transcripts@3.2.0:
     resolution: {integrity: sha512-DG6fxZTUNmdJ2A96/4SobHM8lQ8LYsx3Je+TRbhEdHh3NGoqo12HaXg8gTKGv0XuzwoxHtLDSHschwKUyjeJpA==}
     peerDependencies:
@@ -411,9 +402,6 @@ packages:
   highlight.js@11.10.0:
     resolution: {integrity: sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==}
     engines: {node: '>=12.0.0'}
-
-  html-entities@2.5.2:
-    resolution: {integrity: sha512-K//PSRMQk4FZ78Kyau+mZurHn3FH0Vwr+H36eE0rPbeYkRRi9YxceYPhuN60UwWorxyKHhqoAJl2OFKa4BVtaA==}
 
   http-response-object@3.0.2:
     resolution: {integrity: sha512-bqX0XTF6fnXSQcEJ2Iuyr75yVakyjIDCqroJQ/aHfSdlM743Cwqoi2nDYMzLGWUcuTWGWy8AAvOKXTfiv6q9RA==}
@@ -1095,23 +1083,6 @@ snapshots:
 
   discord-api-types@0.37.83: {}
 
-  discord-arts@0.6.1:
-    dependencies:
-      '@napi-rs/canvas': 0.1.53
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
-
-  discord-gamecord@4.4.2:
-    dependencies:
-      discord.js: 14.15.3
-      html-entities: 2.5.2
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - utf-8-validate
-
   discord-html-transcripts@3.2.0(discord.js@14.15.3):
     dependencies:
       '@derockdev/discord-components-core': 3.6.1
@@ -1219,8 +1190,6 @@ snapshots:
   hex-to-rgba@2.0.1: {}
 
   highlight.js@11.10.0: {}
-
-  html-entities@2.5.2: {}
 
   http-response-object@3.0.2:
     dependencies:

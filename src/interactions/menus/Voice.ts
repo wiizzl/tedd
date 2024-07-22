@@ -3,16 +3,21 @@ import { ComponentType, EmbedBuilder, GuildChannel, PermissionFlagsBits, StringS
 import CustomClient from "../../base/classes/CustomClient";
 import Interaction from "../../base/classes/Interaction";
 
-export default class Ticket extends Interaction {
+export default class Voice extends Interaction {
     constructor(client: CustomClient) {
         super(client, {
             name: "voice",
             permissions: PermissionFlagsBits.UseApplicationCommands,
+            cooldown: 3,
             type: ComponentType.StringSelect,
         });
     }
 
     async Execute(interaction: StringSelectMenuInteraction) {
+        await interaction.message.edit({
+            embeds: [interaction.message.embeds[0]],
+        });
+
         if (interaction.message.content.split("@")[1].split(">")[0] !== interaction.user.id) {
             return await interaction.reply({
                 embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Vous n'êtes pas le propriétaire du salon.")],
@@ -21,10 +26,6 @@ export default class Ticket extends Interaction {
         }
 
         const interactionChannel = interaction.channel as GuildChannel;
-
-        await interaction.message.edit({
-            embeds: [interaction.message.embeds[0]],
-        });
 
         try {
             switch (interaction.values[0]) {

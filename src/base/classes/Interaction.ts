@@ -9,12 +9,14 @@ export default class Interaction implements IInteraction {
     client: CustomClient;
     name: string;
     permissions: bigint;
+    cooldown: number;
     type: ComponentType;
 
     constructor(client: CustomClient, options: IInteractionOptions) {
         this.client = client;
         this.name = options.name;
         this.permissions = options.permissions;
+        this.cooldown = options.cooldown;
         this.type = options.type;
     }
 

@@ -1,12 +1,12 @@
 import { ButtonInteraction, ComponentType, EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import Interaction from "../../base/classes/Interaction";
+import CustomClient from "../../../base/classes/CustomClient";
+import Interaction from "../../../base/classes/Interaction";
 
-export default class Rules extends Interaction {
+export default class Craft extends Interaction {
     constructor(client: CustomClient) {
         super(client, {
-            name: "rules",
+            name: "panel_craft",
             permissions: PermissionFlagsBits.UseApplicationCommands,
             cooldown: 3,
             type: ComponentType.Button,
@@ -15,8 +15,10 @@ export default class Rules extends Interaction {
 
     async Execute(interaction: ButtonInteraction) {
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Merci d'avoir pris le temps de lire le règlement !")],
+            embeds: [new EmbedBuilder().setTitle("test")],
             ephemeral: true,
+            components: [],
+            files: [],
         });
     }
 }

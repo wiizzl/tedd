@@ -10,6 +10,7 @@ export default class Close extends Interaction {
         super(client, {
             name: "close_ticket",
             permissions: PermissionFlagsBits.UseApplicationCommands,
+            cooldown: 3,
             type: ComponentType.Button,
         });
     }

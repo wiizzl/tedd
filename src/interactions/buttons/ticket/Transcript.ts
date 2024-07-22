@@ -11,6 +11,7 @@ export default class Transcript extends Interaction {
         super(client, {
             name: "transcript_ticket",
             permissions: PermissionFlagsBits.UseApplicationCommands,
+            cooldown: 3,
             type: ComponentType.Button,
         });
     }

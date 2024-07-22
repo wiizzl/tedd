@@ -1,33 +1,28 @@
 import { EmbedBuilder, Events, Guild } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import Event from "../../base/classes/Event";
+import CustomClient from "../../../base/classes/CustomClient";
+import Event from "../../../base/classes/Event";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
-
-export default class GuildDelete extends Event {
+export default class Goodbye extends Event {
     constructor(client: CustomClient) {
         super(client, {
             name: Events.GuildCreate,
-            description: "Guild join event",
+            description: "Send goodbye message when owner remove the bot from a server.",
             once: false,
         });
     }
 
     async Execute(guild: Guild) {
         try {
-            if (!(await GuildConfig.findOne({ guildId: guild.id }))) {
-                await GuildConfig.create({ guildId: guild.id });
-            }
-
             const owner = await guild.fetchOwner();
+
             owner
                 ?.send({
                     embeds: [
                         new EmbedBuilder()
-                            .setColor("Green")
+                            .setColor("Red")
                             .setDescription(
-                                `:wave: Bonjour **${owner.user.username}** !\n\n\`${this.client.user?.username}\` a bien été ajouté au serveur \`${guild.name}\` !`
+                                `👋 Bonjour **${owner.user.displayName}** !\n\n\`${this.client.user?.username}\` a bien été supprimé du serveur \`${guild.name}\` !`
                             ),
                     ],
                 })

@@ -1,12 +1,4 @@
-import {
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    ChatInputCommandInteraction,
-    ColorResolvable,
-    EmbedBuilder,
-    PermissionFlagsBits,
-} from "discord.js";
+import { ChatInputCommandInteraction, ColorResolvable, EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
 import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
@@ -40,11 +32,6 @@ export default class Ping extends Command {
 
         return await interaction.reply({
             embeds: [new EmbedBuilder().setColor(color).setDescription(`🏓 Pong : \`${ping}ms\``)],
-            components: [
-                new ActionRowBuilder<ButtonBuilder>().addComponents(
-                    new ButtonBuilder().setLabel("Rafraîchir").setEmoji("🔄").setStyle(ButtonStyle.Secondary).setCustomId("ping")
-                ),
-            ],
             ephemeral: true,
         });
     }

@@ -30,7 +30,10 @@ export default model<IGuildConfig>(
 
     new Schema<IGuildConfig>(
         {
-            guildId: String,
+            guildId: {
+                type: String,
+                required: true,
+            },
             logs: {
                 moderation: {
                     enabled: Boolean,
