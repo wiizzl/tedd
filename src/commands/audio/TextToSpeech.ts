@@ -13,6 +13,7 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
 
 export default class TextToSpeech extends Command {
     constructor(client: CustomClient) {
@@ -45,7 +46,7 @@ export default class TextToSpeech extends Command {
 
         if (!voiceChannelMember) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous n'êtes pas dans un salon vocal.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous n'êtes pas dans un salon vocal.`)],
                 ephemeral: true,
             });
         }
@@ -53,7 +54,7 @@ export default class TextToSpeech extends Command {
             return await interaction.reply({
                 embeds: [
                     errorEmbed.setDescription(
-                        `❌ Je suis déjà dans un salon vocal, réessayez plus tard ou rejoignez moi dans le salon : ${voiceChannelMember}`
+                        `${Emojis.Cross} Je suis déjà dans un salon vocal, réessayez plus tard ou rejoignez moi dans le salon : ${voiceChannelMember}`
                     ),
                 ],
                 ephemeral: true,
@@ -61,7 +62,7 @@ export default class TextToSpeech extends Command {
         }
         if (phrase.length > 256) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Votre phrase ne doit pas dépasser 256 caractères.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Votre phrase ne doit pas dépasser 256 caractères.`)],
                 ephemeral: true,
             });
         }
@@ -70,13 +71,17 @@ export default class TextToSpeech extends Command {
             this.textToSpeech(voiceChannelMember, interaction.guild!, phrase, "fr");
 
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Green").setDescription(`✅ Je me connecte a votre salon vocal pour vous dire : \`${phrase}\``)],
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor("Green")
+                        .setDescription(`${Emojis.Tick} Je me connecte a votre salon vocal pour vous dire : \`${phrase}\``),
+                ],
                 ephemeral: true,
             });
         } catch (error) {
             console.error(error);
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Erreur lors de la lecture de la phrase, essayez-en une autre !")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Erreur lors de la lecture de la phrase, essayez-en une autre !`)],
                 ephemeral: true,
             });
         }

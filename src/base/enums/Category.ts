@@ -3,7 +3,6 @@ enum Category {
     Development = "Développement",
     Games = "Jeux",
     Moderation = "Modération",
-    Logs = "Archive",
     Audio = "Audio",
     Embeds = "Embeds",
 }

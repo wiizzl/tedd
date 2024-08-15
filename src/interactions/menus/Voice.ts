@@ -3,6 +3,8 @@ import { ComponentType, EmbedBuilder, GuildChannel, PermissionFlagsBits, StringS
 import CustomClient from "../../base/classes/CustomClient";
 import Interaction from "../../base/classes/Interaction";
 
+import Emojis from "../../base/enums/Emojis";
+
 export default class Voice extends Interaction {
     constructor(client: CustomClient) {
         super(client, {
@@ -20,7 +22,7 @@ export default class Voice extends Interaction {
 
         if (interaction.message.content.split("@")[1].split(">")[0] !== interaction.user.id) {
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Vous n'êtes pas le propriétaire du salon.")],
+                embeds: [new EmbedBuilder().setColor("Red").setDescription(`${Emojis.Cross} Vous n'êtes pas le propriétaire du salon.`)],
                 ephemeral: true,
             });
         }
@@ -46,7 +48,7 @@ export default class Voice extends Interaction {
                 case "locked":
                     await interactionChannel.permissionOverwrites.create(interaction.guild?.id!, {
                         ViewChannel: false,
-                        Connect: true,
+                        Connect: false,
                     });
                     break;
 
@@ -55,13 +57,13 @@ export default class Voice extends Interaction {
             }
 
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Action effectuée avec succès.")],
+                embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Action effectuée avec succès.`)],
                 ephemeral: true,
             });
         } catch (error) {
             console.error(error);
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Une erreur est survenue lors de la création du ticket.")],
+                embeds: [new EmbedBuilder().setColor("Red").setDescription(`${Emojis.Cross} Une erreur est survenue lors de la création du ticket.`)],
                 ephemeral: true,
             });
         }

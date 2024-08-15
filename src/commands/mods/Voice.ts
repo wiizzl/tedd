@@ -4,6 +4,8 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
+
 import GuildConfig from "../../base/schemas/GuildConfig";
 
 export default class Voice extends Command {
@@ -48,7 +50,7 @@ export default class Voice extends Command {
             await guild.save();
 
             return interaction.editReply({
-                embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Le salon vocal a bien été défini.")],
+                embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Le salon vocal a bien été défini.`)],
             });
         } catch (error) {
             console.error(error);
@@ -57,7 +59,9 @@ export default class Voice extends Command {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Une erreur est survenue en mettant à jour la base de données. Merci de réessayer ultérieurement."),
+                        .setDescription(
+                            `${Emojis.Cross} Une erreur est survenue en mettant à jour la base de données. Merci de réessayer ultérieurement.`
+                        ),
                 ],
             });
         }

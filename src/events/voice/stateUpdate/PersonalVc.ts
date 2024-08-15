@@ -21,7 +21,7 @@ export default class PersonalVc extends Event {
         if (guild && voice?.channelId) {
             const member = oldState.member;
 
-            if (newState.channelId === null && oldState.channel?.name.startsWith("Salon de ")) {
+            if (oldState.channel?.name.startsWith("Salon de ")) {
                 if (oldState.channel.members.size !== 0) return;
 
                 oldState.channel.delete();
@@ -71,7 +71,7 @@ export default class PersonalVc extends Event {
                                     {
                                         label: "Privé",
                                         value: "locked",
-                                        description: "Salon accessible mais non visible.",
+                                        description: "Salon non accessible et non visible.",
                                         emoji: "🔐",
                                     },
                                 ]),

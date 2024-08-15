@@ -3,6 +3,8 @@ import { ButtonInteraction, Collection, EmbedBuilder, Events, PermissionsBitFiel
 import CustomClient from "../../../base/classes/CustomClient";
 import Event from "../../../base/classes/Event";
 
+import Emojis from "../../../base/enums/Emojis";
+
 export default class InteractionHandler extends Event {
     constructor(client: CustomClient) {
         super(client, {
@@ -14,13 +16,15 @@ export default class InteractionHandler extends Event {
 
     async Execute(interaction: ButtonInteraction | StringSelectMenuInteraction) {
         if (interaction.isButton() || interaction.isStringSelectMenu()) {
+            if (interaction.customId.startsWith("giveaway_")) return;
+
             const file = this.client.interactions.find((i) => i.name === interaction.customId && i.type === interaction.componentType);
 
             if (!file) {
                 this.client.interactions.delete(interaction.customId);
 
                 return await interaction.reply({
-                    embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Cette intéraction n'a pas d'action associée.")],
+                    embeds: [new EmbedBuilder().setColor("Red").setDescription(`${Emojis.Cross} Cette intéraction n'a pas d'action associée.`)],
                     ephemeral: true,
                 });
             }
@@ -46,7 +50,7 @@ export default class InteractionHandler extends Event {
                         new EmbedBuilder()
                             .setColor("Red")
                             .setDescription(
-                                `❌ Merci d'attendre \`${((cooldown + cooldownAmount - now) / 1000).toFixed(
+                                `${Emojis.Cross} Merci d'attendre \`${((cooldown + cooldownAmount - now) / 1000).toFixed(
                                     0
                                 )} secondes\` avant de ré-exécuter cette intéraction.`
                             ),
@@ -66,7 +70,11 @@ export default class InteractionHandler extends Event {
                 !interaction.member?.permissions.has(new PermissionsBitField(file.permissions))
             ) {
                 return await interaction.reply({
-                    embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Vous n'avez pas la permission d'utiliser cette intéraction.")],
+                    embeds: [
+                        new EmbedBuilder()
+                            .setColor("Red")
+                            .setDescription(`${Emojis.Cross} Vous n'avez pas la permission d'utiliser cette intéraction.`),
+                    ],
                     ephemeral: true,
                 });
             }

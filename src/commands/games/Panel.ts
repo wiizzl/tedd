@@ -13,6 +13,7 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+
 import UserConfig from "../../base/schemas/UserConfig";
 
 import { drawBanner } from "../../utils/drawBanner";
@@ -57,33 +58,35 @@ export default class Panel extends Command {
                         {
                             name: "<:xp:1264640839267913849> Grade",
                             value: `${
-                                prestige > 0 ? `Prestige \`${prestige}\` - \`${userDB?.level.level || 1}\`` : `Niveau \`${userDB?.level.level || 1}\``
+                                prestige > 0
+                                    ? `Prestige \`${prestige}\` - \`${userDB?.level.level || 1}\``
+                                    : `Niveau : \`${userDB?.level.level || 1}\``
                             }`,
                             inline: true,
                         },
                         {
                             name: "<:clan:1264935707592622162> Clan",
-                            value: `Tag : [\`${userDB?.clan || "Aucun"}\`]`,
+                            value: `Tag : [\`${userDB?.clan.tag || "Aucun"}\`]`,
                             inline: true,
                         },
                         {
                             name: "<:braderie:1264690409263595673> Boîte mystère",
-                            value: "Ce jeu aléatoire vous permettra d'échanger vos crédits contre de l'expérience et une arme qui ira dans votre inventaire.",
+                            value: "Permet d'échanger 950 crédits contre de l'expérience et une arme qui ira dans votre inventaire.",
                             inline: false,
                         },
                         {
                             name: "<:craft:1264690078975000576> Établi",
-                            value: "Ce menu de fabrication vous permettra de construire des armes et des objets à partir de matériaux récoltés lors d'évènements.",
+                            value: "Permet de construire des armes et des objets à partir de matériaux achetés ou récoltés lors d'évènements.",
                             inline: false,
                         },
                         {
                             name: "<:shop:1264690102597189845> Boutique",
-                            value: "Ce menu vous permettra d'acheter des objets spéciaux.",
+                            value: "Permet d'acheter des objets spéciaux.",
                             inline: false,
                         },
                         {
                             name: "<:pinceau:1264690139037302855> Personnalisation",
-                            value: "Ce menu vous permettra de modifier diverses informations de votre profil.",
+                            value: "Permet de modifier diverses informations de votre profil.",
                             inline: false,
                         },
                     ])

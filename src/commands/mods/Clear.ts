@@ -14,6 +14,8 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
+
 import GuildConfig from "../../base/schemas/GuildConfig";
 
 export default class Clear extends Command {
@@ -58,7 +60,7 @@ export default class Clear extends Command {
 
         if (amount < 1 || amount > 100) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Le nombre de messages à supprimer doit être compris entre 1 et 100.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Le nombre de messages à supprimer doit être compris entre 1 et 100.`)],
                 ephemeral: true,
             });
         }
@@ -71,7 +73,7 @@ export default class Clear extends Command {
             await channel.bulkDelete(Array.from(filterMessages.keys()).slice(0, amount), true);
         } catch (error) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Impossible de supprimer les messages.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Impossible de supprimer les messages.`)],
                 ephemeral: true,
             });
         }
@@ -100,7 +102,9 @@ export default class Clear extends Command {
                 new EmbedBuilder()
                     .setColor("Green")
                     .setDescription(
-                        `✅ Suppression de \`${amount}\` messages${target ? ` (de ${target})` : ""} dans le salon ${channel} effectuée avec succès.`
+                        `${Emojis.Tick} Suppression de \`${amount}\` messages${
+                            target ? ` (de ${target})` : ""
+                        } dans le salon ${channel} effectuée avec succès.`
                     ),
             ],
             ephemeral: true,

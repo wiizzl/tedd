@@ -3,6 +3,8 @@ import { ButtonInteraction, ComponentType, EmbedBuilder, PermissionFlagsBits } f
 import CustomClient from "../../../base/classes/CustomClient";
 import Interaction from "../../../base/classes/Interaction";
 
+import Emojis from "../../../base/enums/Emojis";
+
 import UserConfig from "../../../base/schemas/UserConfig";
 
 import data from "../../../../data/misterybox.json";
@@ -19,8 +21,6 @@ export default class Box extends Interaction {
     }
 
     async Execute(interaction: ButtonInteraction) {
-        let weaponExists = false;
-
         const userDB = await UserConfig.findOne({ userId: interaction.user.id, guildId: interaction.guild?.id });
 
         const boxIndex = Math.floor(Math.random() * data.box.length);
@@ -29,14 +29,18 @@ export default class Box extends Interaction {
 
         if (userDB?.credit! < boxPrice || userDB?.credit === undefined) {
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Vous n'avez pas assez de crédit pour ouvrir une boîte mystère.")],
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor("Red")
+                        .setDescription(`${Emojis.Cross} Vous n'avez pas assez de crédit pour ouvrir une boîte mystère.`),
+                ],
                 ephemeral: true,
             });
         }
 
         if (userDB?.inventory.content.length! >= (userDB?.inventory.size! || 50)) {
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Votre inventaire est plein.")],
+                embeds: [new EmbedBuilder().setColor("Red").setDescription(`${Emojis.Cross} Votre inventaire est plein.`)],
                 ephemeral: true,
             });
         }
@@ -62,7 +66,7 @@ export default class Box extends Interaction {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Erreur lors de l'ouverture de la boîte mystère, veuillez réessayer plus tard."),
+                        .setDescription(`${Emojis.Cross} Erreur lors de l'ouverture de la boîte mystère, veuillez réessayer plus tard.`),
                 ],
                 ephemeral: true,
             });
@@ -83,43 +87,65 @@ export default class Box extends Interaction {
 
         setTimeout(async () => {
             try {
-                userDB.credit -= boxPrice;
-                userDB.level.xp += selectedRarity.xp;
+                await UserConfig.updateOne(
+                    { userId: interaction.user.id, guildId: interaction.guild?.id },
+                    { $inc: { credit: -boxPrice, "level.xp": selectedRarity.xp } }
+                );
 
-                if (userDB.level.xp >= getLevelXp(userDB.level.level)) {
-                    userDB!.level.xp = 0;
-                    userDB!.level.level += 1;
-                    userDB!.credit += getLevelXp(userDB.level.level) / 2;
+                const existingWeapon = await UserConfig.findOne({
+                    userId: interaction.user.id,
+                    guildId: interaction.guild?.id,
+                    "inventory.content.name": openedWeapon.name,
+                });
 
-                    interaction.message.reply({
+                if (existingWeapon) {
+                    await UserConfig.updateOne(
+                        { userId: interaction.user.id, guildId: interaction.guild?.id, "inventory.content.name": openedWeapon.name },
+                        {
+                            $inc: { "inventory.content.$.quantity": 1 },
+                        }
+                    );
+                } else {
+                    await UserConfig.updateOne(
+                        { userId: interaction.user.id, guildId: interaction.guild?.id },
+                        {
+                            $push: { "inventory.content": { rarity: selectedRarity.name, name: openedWeapon.name, quantity: 1 } },
+                        }
+                    );
+                }
+
+                const xp = userDB.level.xp || 0;
+                const level = userDB.level.level || 1;
+
+                if (xp >= getLevelXp(level)) {
+                    const winCredit = getLevelXp(level) / 2;
+
+                    await UserConfig.updateOne(
+                        { userId: interaction.user.id, guildId: interaction.guildId },
+                        {
+                            $set: {
+                                "level.xp": 0,
+                                "level.level": level + 1,
+                            },
+                            $inc: {
+                                credit: winCredit,
+                            },
+                        }
+                    );
+
+                    await interaction.message.reply({
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(this.client.config.color)
                                 .setAuthor({ name: "Niveau supérieur !", iconURL: "https://i.imgur.com/wiXvc3C.png" })
                                 .setDescription(
-                                    `Bravo ${interaction.user}, vous venez de passer au niveau \`${userDB!.level.level}\` ! Vous gagnez \`${
-                                        getLevelXp(userDB.level.level) / 2
-                                    }\` crédits !`
+                                    `Bravo ${interaction.user}, vous venez de passer au niveau \`${
+                                        level + 1
+                                    }\` ! Vous gagnez \`${winCredit}\` crédits !`
                                 ),
                         ],
                     });
                 }
-
-                userDB.inventory.content.forEach((item) => {
-                    if (item.name === openedWeapon.name) {
-                        item.quantity += 1;
-                        weaponExists = true;
-                    }
-                });
-                if (!weaponExists) {
-                    userDB.inventory.content.push({
-                        rarity: selectedRarity.name,
-                        name: openedWeapon.name,
-                        quantity: 1,
-                    });
-                }
-
-                userDB.save();
 
                 return await replyMessage
                     .edit({

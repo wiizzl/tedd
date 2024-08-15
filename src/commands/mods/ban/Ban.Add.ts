@@ -1,9 +1,10 @@
 import { ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, TextChannel } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import SubCommand from "../../base/classes/SubCommand";
+import CustomClient from "../../../base/classes/CustomClient";
+import SubCommand from "../../../base/classes/SubCommand";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import Emojis from "../../../base/enums/Emojis";
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class BanAdd extends SubCommand {
     constructor(client: CustomClient) {
@@ -22,33 +23,35 @@ export default class BanAdd extends SubCommand {
 
         if (!target) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous devez spécifier un membre valide.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous devez spécifier un membre valide.`)],
                 ephemeral: true,
             });
         }
         if (target.id === interaction.user.id) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous ne pouvez pas vous bannir vous-même.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous ne pouvez pas vous bannir vous-même.`)],
                 ephemeral: true,
             });
         }
         if (target.roles.highest.position >= (interaction.member!.roles as GuildMemberRoleManager).highest.position) {
             return await interaction.reply({
                 embeds: [
-                    errorEmbed.setDescription("❌ Vous ne pouvez pas bannir un utilisateur avec un rôle égal ou supérieur à votre rôle actuel."),
+                    errorEmbed.setDescription(
+                        `${Emojis.Cross} Vous ne pouvez pas bannir un utilisateur avec un rôle égal ou supérieur à votre rôle actuel.`
+                    ),
                 ],
                 ephemeral: true,
             });
         }
         if (!target.bannable) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Cet utilisateur ne peut pas être banni.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Cet utilisateur ne peut pas être banni.`)],
                 ephemeral: true,
             });
         }
         if (reason.length > 512) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Ce motif est trop long (max 512 caractères).")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Ce motif est trop long (max 512 caractères).`)],
                 ephemeral: true,
             });
         }
@@ -72,7 +75,7 @@ export default class BanAdd extends SubCommand {
             .setThumbnail(target.displayAvatarURL({ size: 64 }))
             .setAuthor({ name: `🔨 Bannissement | ${target.user.tag}` })
             .setDescription(
-                `❌ Le membre ${target} - \`${target.id}\` a été banni du serveur !\n\n${
+                `${Emojis.Cross} Le membre ${target} - \`${target.id}\` a été banni du serveur !\n\n${
                     days > 0 && `Les messages des dernières \`${days / 60 / 60} heures\` de ce membre ont été supprimés.`
                 }\n\n**Motif** : \`${reason}\``
             )
@@ -101,7 +104,7 @@ export default class BanAdd extends SubCommand {
         }
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Banissement effectué avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Banissement effectué avec succès.`)],
             ephemeral: true,
         });
     }

@@ -11,6 +11,8 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
+
 import UserConfig from "../../base/schemas/UserConfig";
 
 import { drawBanner } from "../../utils/drawBanner";
@@ -47,7 +49,9 @@ export default class Profile extends Command {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Cet utilisateur n'a pas encore créé de profil. Il doit d'abord utiliser la commande */panel*."),
+                        .setDescription(
+                            `${Emojis.Cross} Cet utilisateur n'a pas encore créé de profil. Il doit d'abord utiliser la commande \`/panel\`.`
+                        ),
                 ],
             });
         }
@@ -59,20 +63,22 @@ export default class Profile extends Command {
             embeds: [
                 new EmbedBuilder()
                     .setColor((await target.user.fetch()).accentColor ?? this.client.config.color)
-                    .setAuthor({ name: `Profile de ${target.user.displayName}`, iconURL: target.user.avatarURL()! })
+                    .setAuthor({ name: `Profil de ${target.user.displayName}`, iconURL: target.user.avatarURL()! })
                     .setDescription(`Mention : ${target}`)
                     .addFields([
                         { name: "<:credit:1264690330570195074> Crédit", value: `Montant : \`${userDB?.credit || 0}\``, inline: true },
                         {
                             name: "<:xp:1264640839267913849> Grade",
                             value: `${
-                                prestige > 0 ? `Prestige \`${prestige}\` - \`${userDB?.level.level || 1}\`` : `Niveau \`${userDB?.level.level || 1}\``
+                                prestige > 0
+                                    ? `Prestige \`${prestige}\` - \`${userDB?.level.level || 1}\``
+                                    : `Niveau : \`${userDB?.level.level || 1}\``
                             }`,
                             inline: true,
                         },
                         {
                             name: "<:clan:1264935707592622162> Clan",
-                            value: `Tag : [\`${userDB?.clan || "Aucun"}\`]`,
+                            value: `Tag : [\`${userDB?.clan.tag || "Aucun"}\`]`,
                             inline: true,
                         },
                     ])

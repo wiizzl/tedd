@@ -6,6 +6,8 @@ import Interaction from "../../../base/classes/Interaction";
 
 import GuildConfig from "../../../base/schemas/GuildConfig";
 
+import Emojis from "../../../base/enums/Emojis";
+
 export default class Transcript extends Interaction {
     constructor(client: CustomClient) {
         super(client, {
@@ -23,12 +25,21 @@ export default class Transcript extends Interaction {
             interaction.user.send({
                 embeds: [
                     new EmbedBuilder()
-                        .setColor("Green")
-                        .setDescription(`Voici le transcript de votre ticket du serveur \`${interaction.guild?.name}\`.`),
+                        .setColor("Yellow")
+                        .setDescription(`📜 Voici le transcript de votre ticket du serveur \`${interaction.guild?.name}\`.`),
                 ],
                 files: [transcript],
             });
-        } catch (error) {}
+        } catch (error) {
+            interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor("Red")
+                        .setDescription(`${Emojis.Cross} Vos messages privés sont fermés, je n'ai donc pas pu vous envoyer le transcript.`),
+                ],
+                ephemeral: true,
+            });
+        }
 
         const guild = await GuildConfig.findOne({ guildId: interaction.guildId });
         const log = guild?.logs?.tickets;
@@ -55,7 +66,7 @@ export default class Transcript extends Interaction {
         }
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Transcript envoyé dans vos messages privés avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Transcript envoyé dans vos messages privés avec succès.`)],
             ephemeral: true,
         });
     }

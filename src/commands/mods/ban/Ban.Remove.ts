@@ -1,9 +1,10 @@
 import { ChatInputCommandInteraction, EmbedBuilder, TextChannel } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import SubCommand from "../../base/classes/SubCommand";
+import CustomClient from "../../../base/classes/CustomClient";
+import SubCommand from "../../../base/classes/SubCommand";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import Emojis from "../../../base/enums/Emojis";
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class BanRemove extends SubCommand {
     constructor(client: CustomClient) {
@@ -20,7 +21,7 @@ export default class BanRemove extends SubCommand {
 
         if (reason.length > 512) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Ce motif est trop long (max 512 caractères).")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Ce motif est trop long (max 512 caractères).`)],
                 ephemeral: true,
             });
         }
@@ -29,7 +30,7 @@ export default class BanRemove extends SubCommand {
             await interaction.guild?.bans.fetch(target!);
         } catch (error) {
             return interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Ce membre n'est pas banni.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Ce membre n'est pas banni.`)],
                 ephemeral: true,
             });
         }
@@ -39,7 +40,7 @@ export default class BanRemove extends SubCommand {
         } catch (error) {
             console.error(error);
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Une erreur est survenue lors du débannissement.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Une erreur est survenue lors du débannissement.`)],
                 ephemeral: true,
             });
         }
@@ -53,7 +54,9 @@ export default class BanRemove extends SubCommand {
                     new EmbedBuilder()
                         .setColor("Green")
                         .setAuthor({ name: `🔨 Débannissement | ${target}` })
-                        .setDescription(`✅ Le membre avec l'identifiant \`${target}\` a été débanni du serveur !\n\n**Motif** : \`${reason}\``)
+                        .setDescription(
+                            `${Emojis.Tick} Le membre avec l'identifiant \`${target}\` a été débanni du serveur !\n\n**Motif** : \`${reason}\``
+                        )
                         .setTimestamp()
                         .setFooter({
                             text: `Débannissement effectué par ${interaction.user.tag} - ${interaction.user.id}`,
@@ -64,7 +67,7 @@ export default class BanRemove extends SubCommand {
         }
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Débanissement effectué avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Débanissement effectué avec succès.`)],
             ephemeral: true,
         });
     }

@@ -1,16 +1,16 @@
 import { ApplicationCommandOptionType, ChannelType, PermissionsBitField } from "discord.js";
 
-import Command from "../../base/classes/Command";
-import CustomClient from "../../base/classes/CustomClient";
+import Command from "../../../base/classes/Command";
+import CustomClient from "../../../base/classes/CustomClient";
 
-import Category from "../../base/enums/Category";
+import Category from "../../../base/enums/Category";
 
 export default class Logs extends Command {
     constructor(client: CustomClient) {
         super(client, {
             name: "logs",
             description: "Configurer les logs du robot.",
-            category: Category.Logs,
+            category: Category.Moderation,
             default_member_permissions: PermissionsBitField.Flags.Administrator,
             dm_permission: false,
             cooldown: 3,
@@ -41,6 +41,10 @@ export default class Logs extends Command {
                                 {
                                     name: "Tickets",
                                     value: "tickets",
+                                },
+                                {
+                                    name: "Arrivées",
+                                    value: "joins",
                                 },
                             ],
                         },
@@ -78,6 +82,10 @@ export default class Logs extends Command {
                                 {
                                     name: "Tickets",
                                     value: "tickets",
+                                },
+                                {
+                                    name: "Arrivées",
+                                    value: "joins",
                                 },
                             ],
                         },

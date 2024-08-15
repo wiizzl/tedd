@@ -1,10 +1,12 @@
 import { ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, TextChannel } from "discord.js";
 import ms from "ms";
 
-import CustomClient from "../../base/classes/CustomClient";
-import SubCommand from "../../base/classes/SubCommand";
+import CustomClient from "../../../base/classes/CustomClient";
+import SubCommand from "../../../base/classes/SubCommand";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import Emojis from "../../../base/enums/Emojis";
+
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class TimeoutAdd extends SubCommand {
     constructor(client: CustomClient) {
@@ -24,20 +26,22 @@ export default class TimeoutAdd extends SubCommand {
 
         if (!target) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous devez spécifier un membre valide.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous devez spécifier un membre valide.`)],
                 ephemeral: true,
             });
         }
         if (target.id === interaction.user.id) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous ne pouvez pas vous timeout vous-même.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous ne pouvez pas vous timeout vous-même.`)],
                 ephemeral: true,
             });
         }
         if (target.roles.highest.position >= (interaction.member?.roles as GuildMemberRoleManager).highest.position) {
             return await interaction.reply({
                 embeds: [
-                    errorEmbed.setDescription("❌ Vous ne pouvez pas timeout un utilisateur avec un rôle égal ou supérieur à votre rôle actuel."),
+                    errorEmbed.setDescription(
+                        `${Emojis.Cross} Vous ne pouvez pas timeout un utilisateur avec un rôle égal ou supérieur à votre rôle actuel.`
+                    ),
                 ],
                 ephemeral: true,
             });
@@ -46,7 +50,7 @@ export default class TimeoutAdd extends SubCommand {
             return await interaction.reply({
                 embeds: [
                     errorEmbed.setDescription(
-                        `❌ ${target} a déjà un timeout en cours jusqu'à \`${target.communicationDisabledUntil.toLocaleString()}\``
+                        `${Emojis.Cross} ${target} a déjà un timeout en cours jusqu'à \`${target.communicationDisabledUntil.toLocaleString()}\``
                     ),
                 ],
                 ephemeral: true,
@@ -54,7 +58,7 @@ export default class TimeoutAdd extends SubCommand {
         }
         if (reason.length > 512) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Ce motif est trop long (max 512 caractères).")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Ce motif est trop long (max 512 caractères).`)],
                 ephemeral: true,
             });
         }
@@ -78,7 +82,7 @@ export default class TimeoutAdd extends SubCommand {
             .setThumbnail(target.displayAvatarURL({ size: 64 }))
             .setAuthor({ name: `⌛ Timeout | ${target.user.tag}` })
             .setDescription(
-                `❌ Le membre ${target} - \`${target.id}\` a été timeout du serveur pendant \`${duration}\` !\n\n**Expiration** : <t:${(
+                `${Emojis.Cross} Le membre ${target} - \`${target.id}\` a été timeout du serveur pendant \`${duration}\` !\n\n**Expiration** : <t:${(
                     (Date.now() + msDuration) /
                     1000
                 ).toFixed(0)}:F>\n\n**Motif** : \`${reason}\``
@@ -108,7 +112,7 @@ export default class TimeoutAdd extends SubCommand {
         }
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Timeout effectué avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Timeout effectué avec succès.`)],
             ephemeral: true,
         });
     }

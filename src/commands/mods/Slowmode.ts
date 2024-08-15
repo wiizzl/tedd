@@ -4,6 +4,8 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
+
 import GuildConfig from "../../base/schemas/GuildConfig";
 
 export default class Slowmode extends Command {
@@ -64,7 +66,7 @@ export default class Slowmode extends Command {
 
         if (rate < 0 || rate > 26000) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Le taux de lenteur doit être compris entre 0 et 6 heures.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Le taux de lenteur doit être compris entre 0 et 6 heures.`)],
                 ephemeral: true,
             });
         }
@@ -74,7 +76,7 @@ export default class Slowmode extends Command {
         } catch (error) {
             console.error(error);
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Erreur lors de la modification du mode lent.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Erreur lors de la modification du mode lent.`)],
                 ephemeral: true,
             });
         }
@@ -100,7 +102,9 @@ export default class Slowmode extends Command {
 
         return await interaction.reply({
             embeds: [
-                new EmbedBuilder().setColor("Green").setDescription(`✅ Taux du mode lent modifié à \`${rate}\` secondes pour le salon ${channel}`),
+                new EmbedBuilder()
+                    .setColor("Green")
+                    .setDescription(`${Emojis.Tick} Taux du mode lent modifié à \`${rate}\` secondes pour le salon ${channel}`),
             ],
             ephemeral: true,
         });

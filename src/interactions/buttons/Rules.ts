@@ -3,6 +3,8 @@ import { ButtonInteraction, ComponentType, EmbedBuilder, PermissionFlagsBits } f
 import CustomClient from "../../base/classes/CustomClient";
 import Interaction from "../../base/classes/Interaction";
 
+import Emojis from "../../base/enums/Emojis";
+
 export default class Rules extends Interaction {
     constructor(client: CustomClient) {
         super(client, {
@@ -15,7 +17,7 @@ export default class Rules extends Interaction {
 
     async Execute(interaction: ButtonInteraction) {
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Merci d'avoir pris le temps de lire le règlement !")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Merci d'avoir pris le temps de lire le règlement !`)],
             ephemeral: true,
         });
     }

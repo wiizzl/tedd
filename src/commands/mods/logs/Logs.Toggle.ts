@@ -1,9 +1,11 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import SubCommand from "../../base/classes/SubCommand";
+import CustomClient from "../../../base/classes/CustomClient";
+import SubCommand from "../../../base/classes/SubCommand";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import Emojis from "../../../base/enums/Emojis";
+
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class LogsToggle extends SubCommand {
     constructor(client: CustomClient) {
@@ -38,7 +40,7 @@ export default class LogsToggle extends SubCommand {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Green")
-                        .setDescription(`✅ Les logs \`${logType?.toUpperCase()}\` ont bien été ${enabled ? "activé" : "désactivé"}.`),
+                        .setDescription(`${Emojis.Tick} Les logs \`${logType?.toUpperCase()}\` ont bien été ${enabled ? "activé" : "désactivé"}.`),
                 ],
             });
         } catch (error) {
@@ -48,7 +50,9 @@ export default class LogsToggle extends SubCommand {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Une erreur est survenue en mettant à jour la base de données. Merci de réessayer ultérieurement."),
+                        .setDescription(
+                            `${Emojis.Cross} Une erreur est survenue en mettant à jour la base de données. Merci de réessayer ultérieurement.`
+                        ),
                 ],
             });
         }

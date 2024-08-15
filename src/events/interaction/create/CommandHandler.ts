@@ -4,6 +4,8 @@ import Command from "../../../base/classes/Command";
 import CustomClient from "../../../base/classes/CustomClient";
 import Event from "../../../base/classes/Event";
 
+import Emojis from "../../../base/enums/Emojis";
+
 export default class CommandHandler extends Event {
     constructor(client: CustomClient) {
         super(client, {
@@ -22,7 +24,7 @@ export default class CommandHandler extends Event {
             this.client.commands.delete(interaction.commandName);
 
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Cette commande n'a pas d'action associée.")],
+                embeds: [new EmbedBuilder().setColor("Red").setDescription(`${Emojis.Cross} Cette commande n'a pas d'action associée.`)],
                 ephemeral: true,
             });
         }
@@ -48,7 +50,7 @@ export default class CommandHandler extends Event {
                     new EmbedBuilder()
                         .setColor("Red")
                         .setDescription(
-                            `❌ Merci d'attendre \`${((cooldown + cooldownAmount - now) / 1000).toFixed(
+                            `${Emojis.Cross} Merci d'attendre \`${((cooldown + cooldownAmount - now) / 1000).toFixed(
                                 0
                             )} secondes\` avant de ré-exécuter la commande.`
                         ),

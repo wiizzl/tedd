@@ -15,7 +15,7 @@ export default class Shop extends Interaction {
 
     async Execute(interaction: ButtonInteraction) {
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setTitle("test")],
+            embeds: [new EmbedBuilder().setColor(interaction.message.embeds[0].color).setTitle("test")],
             ephemeral: true,
             components: [],
             files: [],

@@ -1,9 +1,11 @@
 import { ChatInputCommandInteraction, EmbedBuilder, GuildMember, GuildMemberRoleManager, TextChannel } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import SubCommand from "../../base/classes/SubCommand";
+import CustomClient from "../../../base/classes/CustomClient";
+import SubCommand from "../../../base/classes/SubCommand";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import Emojis from "../../../base/enums/Emojis";
+
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class TimeoutAdd extends SubCommand {
     constructor(client: CustomClient) {
@@ -20,13 +22,13 @@ export default class TimeoutAdd extends SubCommand {
 
         if (!target) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous devez spécifier un membre valide.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous devez spécifier un membre valide.`)],
                 ephemeral: true,
             });
         }
         if (target.id === interaction.user.id) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous ne pouvez pas retirer votre propre timeout.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous ne pouvez pas retirer votre propre timeout.`)],
                 ephemeral: true,
             });
         }
@@ -34,7 +36,7 @@ export default class TimeoutAdd extends SubCommand {
             return await interaction.reply({
                 embeds: [
                     errorEmbed.setDescription(
-                        "❌ Vous ne pouvez pas retirer le timeout d'un utilisateur avec un rôle égal ou supérieur à votre rôle actuel."
+                        `${Emojis.Cross} Vous ne pouvez pas retirer le timeout d'un utilisateur avec un rôle égal ou supérieur à votre rôle actuel.`
                     ),
                 ],
                 ephemeral: true,
@@ -42,13 +44,13 @@ export default class TimeoutAdd extends SubCommand {
         }
         if (target.communicationDisabledUntil == null) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription(`❌ ${target} n'a pas de timeout en cours.`)],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} ${target} n'a pas de timeout en cours.`)],
                 ephemeral: true,
             });
         }
         if (reason.length > 512) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Ce motif est trop long (max 512 caractères).")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Ce motif est trop long (max 512 caractères).`)],
                 ephemeral: true,
             });
         }
@@ -58,7 +60,7 @@ export default class TimeoutAdd extends SubCommand {
         } catch (error) {
             console.error(error);
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Une erreur est survenue lors de la suppression du timeout.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Une erreur est survenue lors de la suppression du timeout.`)],
                 ephemeral: true,
             });
         }
@@ -73,7 +75,9 @@ export default class TimeoutAdd extends SubCommand {
                         .setColor("Green")
                         .setThumbnail(target.displayAvatarURL({ size: 64 }))
                         .setAuthor({ name: `⌛ Timeout supprimé | ${target.user.tag}` })
-                        .setDescription(`✅ Le timeout du membre ${target} - \`${target.id}\` a été supprimé !\n\n**Motif** : \`${reason}\``)
+                        .setDescription(
+                            `${Emojis.Tick} Le timeout du membre ${target} - \`${target.id}\` a été supprimé !\n\n**Motif** : \`${reason}\``
+                        )
                         .setTimestamp()
                         .setFooter({
                             text: `Suppresion de timeout effectuée par ${interaction.user.tag} - ${interaction.user.id}`,
@@ -84,7 +88,7 @@ export default class TimeoutAdd extends SubCommand {
         }
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Suppression du timeout effectuée avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Suppression du timeout effectuée avec succès.`)],
             ephemeral: true,
         });
     }

@@ -12,6 +12,8 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
+
 import GuildConfig from "../../base/schemas/GuildConfig";
 
 export default class Kick extends Command {
@@ -55,33 +57,35 @@ export default class Kick extends Command {
 
         if (!target) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous devez spécifier un membre valide.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous devez spécifier un membre valide.`)],
                 ephemeral: true,
             });
         }
         if (target.id === interaction.user.id) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Vous ne pouvez pas vous expulser vous-même.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Vous ne pouvez pas vous expulser vous-même.`)],
                 ephemeral: true,
             });
         }
         if (target.roles.highest.position >= (interaction.member?.roles as GuildMemberRoleManager).highest.position) {
             return await interaction.reply({
                 embeds: [
-                    errorEmbed.setDescription("❌ Vous ne pouvez pas expulser un utilisateur avec un rôle égal ou supérieur à votre rôle actuel."),
+                    errorEmbed.setDescription(
+                        `${Emojis.Cross} Vous ne pouvez pas expulser un utilisateur avec un rôle égal ou supérieur à votre rôle actuel.`
+                    ),
                 ],
                 ephemeral: true,
             });
         }
         if (!target.kickable) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Cet utilisateur ne peut pas être expulsé.")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Cet utilisateur ne peut pas être expulsé.`)],
                 ephemeral: true,
             });
         }
         if (reason.length > 512) {
             return await interaction.reply({
-                embeds: [errorEmbed.setDescription("❌ Ce motif est trop long (max 512 caractères).")],
+                embeds: [errorEmbed.setDescription(`${Emojis.Cross} Ce motif est trop long (max 512 caractères).`)],
                 ephemeral: true,
             });
         }
@@ -104,7 +108,7 @@ export default class Kick extends Command {
             .setColor("Orange")
             .setThumbnail(target.displayAvatarURL({ size: 64 }))
             .setAuthor({ name: `👟 Expulsion | ${target.user.tag}` })
-            .setDescription(`❌ Le membre ${target} - \`${target.id}\` a été expulsé du serveur !\n\n**Motif** : \`${reason}\``)
+            .setDescription(`${Emojis.Cross} Le membre ${target} - \`${target.id}\` a été expulsé du serveur !\n\n**Motif** : \`${reason}\``)
             .setTimestamp();
 
         if (!silent) {
@@ -130,7 +134,7 @@ export default class Kick extends Command {
         }
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Expulsion effectuée avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Expulsion effectuée avec succès.`)],
             ephemeral: true,
         });
     }

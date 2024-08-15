@@ -4,6 +4,7 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
 
 export default class Emit extends Command {
     constructor(client: CustomClient) {
@@ -43,7 +44,7 @@ export default class Emit extends Command {
         }
 
         interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription(`✅ Évènement \`${event}\` déclenché avec succès.`)],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Évènement \`${event}\` déclenché avec succès.`)],
             ephemeral: true,
         });
     }

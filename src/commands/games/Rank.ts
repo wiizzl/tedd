@@ -1,4 +1,13 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, GuildMember, PermissionFlagsBits } from "discord.js";
+import {
+    ActionRowBuilder,
+    ApplicationCommandOptionType,
+    ButtonBuilder,
+    ButtonStyle,
+    ChatInputCommandInteraction,
+    EmbedBuilder,
+    GuildMember,
+    PermissionFlagsBits,
+} from "discord.js";
 
 import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
@@ -37,7 +46,7 @@ export default class Rank extends Command {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Cet utilisateur n'a pas encore gagné d'expérience. Il doit d'abord envoyer un message dans un salon."),
+                        .setDescription(`$ Cet utilisateur n'a pas encore gagné d'expérience. Il doit d'abord envoyer un message dans un salon.`),
                 ],
                 ephemeral: true,
             });
@@ -49,16 +58,21 @@ export default class Rank extends Command {
             embeds: [
                 new EmbedBuilder()
                     .setColor((await target.user.fetch()).accentColor ?? this.client.config.color)
-                    .setAuthor({ name: `Rank de ${target.user.displayName}`, iconURL: target.user.avatarURL()! })
+                    .setAuthor({ name: `Rang de ${target.user.displayName}`, iconURL: target.user.avatarURL()! })
                     .setDescription(
                         `Mention : ${target}\n\n${
-                            prestige > 0
-                                ? `Prestige \`${prestige}\` - \`${userDB?.level.level || 1}\``
-                                : `Niveau \`${userDB?.level.level || 1}\` (\`${userDB?.level.xp || 1}\`/\`${getLevelXp(
-                                      userDB?.level.level || 1
-                                  )}\` xp)`
-                        }\n\n${this.drawProgress(userDB?.level.xp || 1, getLevelXp(userDB?.level.level || 1), 20)}`
+                            prestige > 0 ? `Prestige \`${prestige}\` - \`${userDB?.level.level || 1}\`` : `Niveau \`${userDB?.level.level || 1}\``
+                        } (\`${userDB?.level.xp || 1}\`/\`${getLevelXp(userDB?.level.level || 1)}\` xp)\n\n${this.drawProgress(
+                            userDB?.level.xp || 1,
+                            getLevelXp(userDB?.level.level || 1),
+                            15
+                        )}`
                     ),
+            ],
+            components: [
+                new ActionRowBuilder<ButtonBuilder>().addComponents(
+                    new ButtonBuilder().setLabel("Leaderboard").setStyle(ButtonStyle.Secondary).setCustomId("leaderboard")
+                ),
             ],
             ephemeral: true,
         });

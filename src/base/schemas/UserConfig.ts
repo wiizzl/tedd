@@ -3,8 +3,12 @@ import { model, Schema } from "mongoose";
 interface IUserConfig {
     userId: string;
     guildId: string;
+    banner: string;
     credit: number;
-    clan: string;
+    clan: {
+        tag: string;
+        color: string;
+    };
     inventory: {
         size: number;
         content: {
@@ -32,13 +36,23 @@ export default model<IUserConfig>(
                 type: String,
                 required: true,
             },
+            banner: {
+                type: String,
+                default: "https://i.imgur.com/wmZhv6K.png",
+            },
             credit: {
                 type: Number,
                 default: 0,
             },
             clan: {
-                type: String,
-                default: "",
+                tag: {
+                    type: String,
+                    default: "",
+                },
+                color: {
+                    type: String,
+                    default: "#ffffff",
+                },
             },
             inventory: {
                 size: {

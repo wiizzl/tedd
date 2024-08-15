@@ -19,6 +19,10 @@ interface IGuildConfig {
             enabled: boolean;
             channelId: string;
         };
+        joins: {
+            enabled: boolean;
+            channelId: string;
+        };
     };
     voice: {
         channelId: string;
@@ -48,6 +52,10 @@ export default model<IGuildConfig>(
                     channelId: String,
                 },
                 tickets: {
+                    enabled: Boolean,
+                    channelId: String,
+                },
+                joins: {
                     enabled: Boolean,
                     channelId: String,
                 },

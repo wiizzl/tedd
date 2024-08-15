@@ -13,6 +13,8 @@ import {
 import CustomClient from "../../base/classes/CustomClient";
 import Interaction from "../../base/classes/Interaction";
 
+import Emojis from "../../base/enums/Emojis";
+
 export default class Ticket extends Interaction {
     constructor(client: CustomClient) {
         super(client, {
@@ -76,13 +78,13 @@ export default class Ticket extends Interaction {
             });
 
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Green").setDescription(`✅ Votre ticket a été créé avec succès : ${channel}`)],
+                embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Votre ticket a été créé avec succès : ${channel}`)],
                 ephemeral: true,
             });
         } catch (error) {
             console.error(error);
             return await interaction.reply({
-                embeds: [new EmbedBuilder().setColor("Red").setDescription("❌ Une erreur est survenue lors de la création du ticket.")],
+                embeds: [new EmbedBuilder().setColor("Red").setDescription(`${Emojis.Cross} Une erreur est survenue lors de la création du ticket.`)],
                 ephemeral: true,
             });
         }

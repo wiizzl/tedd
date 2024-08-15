@@ -1,9 +1,11 @@
 import { ChatInputCommandInteraction, EmbedBuilder, TextChannel } from "discord.js";
 
-import CustomClient from "../../base/classes/CustomClient";
-import SubCommand from "../../base/classes/SubCommand";
+import CustomClient from "../../../base/classes/CustomClient";
+import SubCommand from "../../../base/classes/SubCommand";
 
-import GuildConfig from "../../base/schemas/GuildConfig";
+import Emojis from "../../../base/enums/Emojis";
+
+import GuildConfig from "../../../base/schemas/GuildConfig";
 
 export default class LogsSet extends SubCommand {
     constructor(client: CustomClient) {
@@ -38,7 +40,9 @@ export default class LogsSet extends SubCommand {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Green")
-                        .setDescription(`✅ Ce salon est désormais utilisé pour afficher les logs de type \`${logType?.toUpperCase()}\`.`),
+                        .setDescription(
+                            `${Emojis.Tick} Ce salon est désormais utilisé pour afficher les logs de type \`${logType?.toUpperCase()}\`.`
+                        ),
                 ],
             });
 
@@ -47,7 +51,9 @@ export default class LogsSet extends SubCommand {
                     new EmbedBuilder()
                         .setColor("Green")
                         .setDescription(
-                            `✅ Les logs \`${logType?.toUpperCase()}\` ont bien été défini pour s'afficher dans le salon ${channel}.\n\n⚠️​ Les logs ne sont pas activés par défaut. Vous pouvez le faire via la commande \`/logs set\` !`
+                            `${
+                                Emojis.Tick
+                            } Les logs \`${logType?.toUpperCase()}\` ont bien été défini pour s'afficher dans le salon ${channel}.\n\n⚠️​ Les logs ne sont pas activés par défaut. Vous pouvez le faire via la commande \`/logs set\` !`
                         ),
                 ],
             });
@@ -58,7 +64,9 @@ export default class LogsSet extends SubCommand {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Une erreur est survenue en mettant à jour la base de données. Merci de réessayer ultérieurement."),
+                        .setDescription(
+                            `${Emojis.Cross} Une erreur est survenue en mettant à jour la base de données. Merci de réessayer ultérieurement.`
+                        ),
                 ],
             });
         }

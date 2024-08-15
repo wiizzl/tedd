@@ -4,6 +4,7 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
 
 export default class Ticket extends Command {
     constructor(client: CustomClient) {
@@ -70,7 +71,7 @@ export default class Ticket extends Command {
         });
 
         return await interaction.reply({
-            embeds: [new EmbedBuilder().setColor("Green").setDescription("✅ Ticket envoyé avec succès.")],
+            embeds: [new EmbedBuilder().setColor("Green").setDescription(`${Emojis.Tick} Ticket envoyé avec succès.`)],
             ephemeral: true,
         });
     }

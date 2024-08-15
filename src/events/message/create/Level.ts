@@ -5,7 +5,7 @@ import Event from "../../../base/classes/Event";
 
 import UserConfig from "../../../base/schemas/UserConfig";
 
-import { getLevelXp, getRandomXp } from "../../../utils/getLevel";
+import { getLevelXp, getRandomNb } from "../../../utils/getLevel";
 
 export default class Level extends Event {
     constructor(client: CustomClient) {
@@ -23,34 +23,44 @@ export default class Level extends Event {
             const userDB = await UserConfig.findOne({ userId: message.author.id, guildId: message.guild.id });
 
             if (!userDB) {
-                await UserConfig.create({ userId: message.author.id, guildId: message.guild.id });
+                return await UserConfig.create({ userId: message.author.id, guildId: message.guild.id });
             }
 
-            const xp = userDB?.level.xp || 0;
-            const level = userDB?.level.level || 1;
+            await UserConfig.updateOne(
+                { userId: message.author.id, guildId: message.guild?.id },
+                { $inc: { "level.xp": getRandomNb(1, 10), credit: getRandomNb(1, 10) } }
+            );
 
-            userDB!.level.xp += getRandomXp(1, 5);
+            const xp = userDB.level.xp || 0;
+            const level = userDB.level.level || 1;
 
             if (xp >= getLevelXp(level)) {
-                userDB!.level.xp = 0;
-                userDB!.level.level += 1;
-                userDB!.credit += getLevelXp(level) / 2;
+                const winCredit = getLevelXp(level) / 2;
 
-                message.reply({
+                await UserConfig.updateOne(
+                    { userId: message.author.id, guildId: message.guildId },
+                    {
+                        $set: {
+                            "level.xp": 0,
+                            "level.level": level + 1,
+                        },
+                        $inc: {
+                            credit: winCredit,
+                        },
+                    }
+                );
+
+                await message.reply({
                     embeds: [
                         new EmbedBuilder()
                             .setColor(this.client.config.color)
                             .setAuthor({ name: "Niveau supérieur !", iconURL: "https://i.imgur.com/wiXvc3C.png" })
                             .setDescription(
-                                `Bravo ${message.author}, vous venez de passer au niveau \`${userDB!.level.level}\` ! Vous gagnez \`${
-                                    getLevelXp(level) / 2
-                                }\` crédits !`
+                                `Bravo ${message.author}, vous venez de passer au niveau \`${level + 1}\` ! Vous gagnez \`${winCredit}\` crédits !`
                             ),
                     ],
                 });
             }
-
-            await userDB?.save();
         } catch (error) {
             console.error(error);
         }

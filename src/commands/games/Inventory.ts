@@ -4,6 +4,8 @@ import Command from "../../base/classes/Command";
 import CustomClient from "../../base/classes/CustomClient";
 
 import Category from "../../base/enums/Category";
+import Emojis from "../../base/enums/Emojis";
+
 import UserConfig from "../../base/schemas/UserConfig";
 
 export default class Inventory extends Command {
@@ -35,7 +37,9 @@ export default class Inventory extends Command {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("Red")
-                        .setDescription("❌ Cet utilisateur n'a pas encore créé de profil. Il doit d'abord utiliser la commande */panel*."),
+                        .setDescription(
+                            `${Emojis.Cross} Cet utilisateur n'a pas encore créé de profil. Il doit d'abord utiliser la commande \`/panel\`.`
+                        ),
                 ],
                 ephemeral: true,
             });
