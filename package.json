@@ -4,8 +4,10 @@
     "main": "src/index.ts",
     "scripts": {
         "clean": "del /s /q build",
+        "clean-linux": "rm -rf build",
         "build": "tsc --build",
         "start": "pnpm run clean && pnpm run build && node build/index.js",
+        "start-linux": "pnpm run clean-linux && pnpm run build && node build/index.js",
         "startNoClean": "node build/index.js"
     },
     "dependencies": {

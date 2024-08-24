@@ -32,15 +32,11 @@ export default class Log extends Event {
                             .setTitle("Message supprimé")
                             .setThumbnail(message.author.displayAvatarURL({ size: 64 }))
                             .setDescription(
-                                `> Auteur du message : <@${message.author.id}>\n> Nom d'utilisateur : \`${message.author.username}\`\n> ID : \`${
-                                    message.author.id
-                                }\`\n> Création du compte : <t:${parseInt((message.author.createdTimestamp / 1000).toString())}:R>\n\n> Channel : ${
-                                    message.channel
-                                }\n> Message : \`${message.content}\`\n\n> Auteur de la suppression : <@${
-                                    author?.executor?.id
-                                }>\n> Nom d'utilisateur : \`${author?.executor?.username}\`\n> ID : \`${
-                                    author?.executor?.id
-                                }\`\n> Création du compte : <t:${parseInt((author?.executor?.createdTimestamp! / 1000).toString())}:R>`
+                                `> Auteur du message : <@${message.author.id}>\n> Nom d'utilisateur : \`${
+                                    message.author.username
+                                }\`\n> ID : \`${message.author.id}\`\n> Création du compte : <t:${parseInt(
+                                    (message.author.createdTimestamp / 1000).toString()
+                                )}:R>\n\n> Channel : ${message.channel}\n> Message : \`${message.content}\``
                             )
                             .setTimestamp(),
                     ],
