@@ -42,7 +42,9 @@ export default class Panel extends Command {
             await UserConfig.create({ userId: member.id, guildId: member.guild.id });
         }
 
-        const attachment = new AttachmentBuilder(await drawBanner(member, userDB)).setName(`${member.user.username}_panel.png`);
+        const attachment = new AttachmentBuilder(await drawBanner(member, userDB)).setName(
+            `${member.user.username}_panel.png`
+        );
         const prestige = getLevelPrestige(userDB?.level.level || 1);
 
         return await interaction.editReply({
@@ -54,7 +56,11 @@ export default class Panel extends Command {
                         iconURL: interaction.user.displayAvatarURL(),
                     })
                     .addFields([
-                        { name: "<:credit:1264690330570195074> Crédit", value: `Montant : \`${userDB?.credit || 0}\``, inline: true },
+                        {
+                            name: "<:credit:1264690330570195074> Crédit",
+                            value: `Montant : \`${userDB?.credit || 0}\``,
+                            inline: true,
+                        },
                         {
                             name: "<:xp:1264640839267913849> Grade",
                             value: `${
@@ -75,16 +81,6 @@ export default class Panel extends Command {
                             inline: false,
                         },
                         {
-                            name: "<:craft:1264690078975000576> Établi",
-                            value: "Permet de construire des armes et des objets à partir de matériaux achetés ou récoltés lors d'évènements.",
-                            inline: false,
-                        },
-                        {
-                            name: "<:shop:1264690102597189845> Boutique",
-                            value: "Permet d'acheter des objets spéciaux.",
-                            inline: false,
-                        },
-                        {
                             name: "<:pinceau:1264690139037302855> Personnalisation",
                             value: "Permet de modifier diverses informations de votre profil.",
                             inline: false,
@@ -95,7 +91,9 @@ export default class Panel extends Command {
             components: [
                 new ActionRowBuilder<ButtonBuilder>().addComponents(
                     new ButtonBuilder()
-                        .setLabel(`Inventaire (${userDB?.inventory.content.length || 0}/${userDB?.inventory.size || 50})`)
+                        .setLabel(
+                            `Inventaire (${userDB?.inventory.content.length || 0}/${userDB?.inventory.size || 50})`
+                        )
                         .setEmoji("<:inventaire:1264690052655616070>")
                         .setStyle(ButtonStyle.Secondary)
                         .setCustomId("panel_bag"),
@@ -104,16 +102,6 @@ export default class Panel extends Command {
                         .setEmoji("<:braderie:1264690409263595673>")
                         .setStyle(ButtonStyle.Secondary)
                         .setCustomId("panel_box"),
-                    new ButtonBuilder()
-                        .setLabel("Établi")
-                        .setEmoji("<:craft:1264690078975000576>")
-                        .setStyle(ButtonStyle.Secondary)
-                        .setCustomId("panel_craft"),
-                    new ButtonBuilder()
-                        .setLabel("Boutique")
-                        .setEmoji("<:shop:1264690102597189845>")
-                        .setStyle(ButtonStyle.Secondary)
-                        .setCustomId("panel_shop"),
                     new ButtonBuilder()
                         .setLabel("Personnalisation")
                         .setEmoji("<:pinceau:1264690139037302855>")

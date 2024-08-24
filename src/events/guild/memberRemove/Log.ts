@@ -31,8 +31,6 @@ export default class Goodbye extends Event {
                                     member.user.username
                                 }\`\n> Création du compte : <t:${parseInt(
                                     (member.user.createdTimestamp / 1000).toString()
-                                )}:R>\n> Date d'arrivée : <t:${parseInt(
-                                    (member.guild.joinedTimestamp / 1000).toString()
                                 )}:R>\n> Date de départ : <t:${parseInt((new Date().getTime() / 1000).toString())}:R>`
                             )
                             .setTimestamp(),
